@@ -43,7 +43,7 @@
   .screen.active{display:block;}
 
   /* MENU */
-  #menu .hero{padding:18px 4px 26px;}
+  #menu .hero{padding:14px 4px 20px;}
   #menu .hero h1{font-size:1.7rem; font-weight:800; color:var(--violet-deep); line-height:1.15;}
   #menu .hero p{margin:10px 0 0; color:var(--ink-soft); font-size:.95rem; line-height:1.5;}
   #menu .hero p.hero-lede{margin-top:8px; font-size:.92rem; color:var(--ink); line-height:1.5;}
@@ -325,6 +325,18 @@
   .rd-end{display:flex; gap:10px; margin-top:18px;}
   .rd-end-btn{flex:1; background:var(--white); border:1px solid var(--line); border-radius:12px; padding:12px; font-weight:700; font-size:.8rem; color:var(--ink-soft); text-align:center;}
   .rd-end-btn.rd-danger{background:#FDECEC; color:#C0392B; border:0;}
+
+  /* SCROLL HINT */
+  .scroll-hint{
+    position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+    background:var(--violet-deep); color:#fff; font-size:.78rem; font-weight:700;
+    padding:10px 18px; border-radius:999px; display:flex; align-items:center; gap:7px;
+    box-shadow:0 8px 22px rgba(70,60,120,.4); z-index:50;
+    opacity:1; transition:opacity .25s ease, transform .25s ease; pointer-events:none;
+  }
+  .scroll-hint.hide{opacity:0; transform:translate(-50%, 12px);}
+  .scroll-hint .chev{animation:scrollBounce 1.3s ease-in-out infinite;}
+  @keyframes scrollBounce{0%,100%{transform:translateY(0);} 50%{transform:translateY(4px);}}
 </style>
 </head>
 <body>
@@ -900,6 +912,11 @@ Laptop</div></div>
 
 </div>
 
+<div class="scroll-hint" id="scrollHint">
+  <span>Poster ansehen</span>
+  <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox(); event.stopPropagation();" aria-label="Schließen">✕</button>
   <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation();">
@@ -911,7 +928,18 @@ Laptop</div></div>
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     window.scrollTo({top:0, behavior:'instant'});
+    updateScrollHint();
   }
+
+  const scrollHint = document.getElementById('scrollHint');
+  function updateScrollHint(){
+    if(!scrollHint) return;
+    const menuActive = document.getElementById('menu').classList.contains('active');
+    const scrolled = window.scrollY > 30;
+    scrollHint.classList.toggle('hide', !menuActive || scrolled);
+  }
+  window.addEventListener('scroll', updateScrollHint);
+  updateScrollHint();
   const gallery = document.getElementById('gallery');
   const dots = document.querySelectorAll('#dots .dot');
 
