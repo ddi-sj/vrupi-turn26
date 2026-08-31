@@ -369,7 +369,18 @@
       </span>
     </button>
 
-    <div class="menu-links">
+    <div class="rd-section-label" style="margin-top:22px;">Poster</div>
+    <a href="poster.pdf" target="_blank" rel="noopener" style="display:block; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:0 2px 10px rgba(70,60,120,.05); margin-bottom:10px;" aria-label="Poster-PDF in voller Größe ansehen">
+      <img src="poster-vorschau.jpg" alt="Vorschau des Konferenzposters, erste Seite" style="width:100%; display:block; background:var(--white);"
+           onerror="this.parentElement.style.display='none'; document.getElementById('poster-fallback').style.display='flex';">
+    </a>
+    <div id="poster-fallback" style="display:none; flex-direction:column; align-items:center; gap:8px; padding:32px 20px; margin-bottom:10px; border:1.5px dashed var(--line); border-radius:var(--radius); color:var(--ink-soft); text-align:center;">
+      <span style="font-size:1.8rem;" aria-hidden="true">🖼️</span>
+      <span style="font-size:.8rem;">poster-vorschau.jpg fehlt noch</span>
+    </div>
+    <a href="poster.pdf" download class="menu-link" style="width:100%; justify-content:center; box-sizing:border-box;">⬇ Poster als PDF herunterladen</a>
+
+    <div class="menu-links" style="margin-top:18px;">
       <a href="https://www.uni-siegen.de/ddi" target="_blank" rel="noopener" class="menu-link">🔗 Kontakt · DDI Siegen</a>
     </div>
 
